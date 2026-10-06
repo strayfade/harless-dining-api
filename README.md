@@ -1,6 +1,6 @@
 # harless-dining-api
 
-Unofficial menu client for **Harless Dining Hall** at Marshall University. Get Breakfast / Lunch / Dinner for any date — with stations, calories, full nutrition, allergens, and diet flags.
+Unofficial menu client for **Harless Dining Hall**. Get Breakfast / Lunch / Dinner for any date — with stations, calories, full nutrition, allergens, and diet flags.
 
 ```ts
 import { getMenu } from 'harless-dining-api';
@@ -145,7 +145,7 @@ with the site's public `api-key` (bundled; overridable via options or `HARLESS_A
 
 ## Limitations
 
-- Unofficial; not affiliated with Marshall University or Sodexo. Menus change without notice.
+- Unofficial; not affiliated with the university or Sodexo. Menus change without notice.
 - Hours of operation aren't in the API — see [Hours of Operation](https://marshall.sodexomyway.com/en-us/locations/hours).
 - No per-item nutrition-label endpoint is used; all nutrition comes from the menu payload.
 

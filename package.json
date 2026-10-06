@@ -1,9 +1,10 @@
 {
   "name": "harless-dining-api",
   "version": "0.1.0",
-  "description": "Unofficial menu client for Marshall University's Harless Dining Hall (Sodexo). Get Breakfast / Lunch / Dinner for any date, with stations, nutrition, and allergens.",
+  "description": "Unofficial menu client for Harless Dining Hall (Sodexo). Get Breakfast / Lunch / Dinner for any date, with stations, nutrition, and allergens.",
   "keywords": [
-    "marshall-university",
+    "harless",
+    "dining-hall",
     "harless",
     "dining-hall",
     "sodexo",

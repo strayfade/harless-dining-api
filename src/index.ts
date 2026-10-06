@@ -1,6 +1,5 @@
 /**
- * harless-dining-api — unofficial menu client for Marshall University's
- * Harless Dining Hall.
+ * harless-dining-api — unofficial menu client for Harless Dining Hall.
  *
  * Data comes from the same public Sodexo JSON endpoint the dining website
  * itself uses (no API key signup needed):

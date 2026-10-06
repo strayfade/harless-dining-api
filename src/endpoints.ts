@@ -1,9 +1,8 @@
 /**
  * Sodexo endpoint builders.
  *
- * Discovered 2026-10-06 via browser DevTools on
- * marshall.sodexomyway.com/en-us/locations/harless-dining-hall:
- * the site's own JS calls
+ * Discovered 2026-10-06 via browser DevTools on the dining site's
+ * Harless Dining Hall page: the site's own JS calls
  *   GET https://api-prd.sodexomyway.net/v0.2/data/menu/45995003/151460?date=YYYY-MM-DD
  * with a public `api-key` header (visible to every site visitor).
  */

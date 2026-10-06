@@ -1,6 +1,10 @@
-# harless-dining-api
+# Do you want to know if they're having chicken sandwiches at Harless today? I want to know if they are!
 
-Unofficial menu client for **Harless Dining Hall**. Get Breakfast / Lunch / Dinner for any date — with stations, calories, full nutrition, allergens, and diet flags.
+Well, now you can!
+
+> Yes, this code is mostly AI-generated, but every line has been checked by a human.
+
+This is an unofficial menu client for **Harless Dining Hall**. Get Breakfast / Lunch / Dinner for any date — with stations, calories, full nutrition, allergens, and diet flags.
 
 ```ts
 import { getMenu } from 'harless-dining-api';
@@ -9,7 +13,7 @@ const menu = await getMenu('2026-10-07');
 console.log(menu.meals.lunch?.items.map((i) => i.name));
 ```
 
-Data comes from the same public Sodexo JSON endpoint the dining website itself uses. **No API key signup needed.**
+Data comes from the same public Sodexo JSON endpoint the dining website itself uses. **No API key or sign up needed.**
 
 - Works on Node 18+ with zero runtime dependencies
 - Ships ESM + CJS with full TypeScript types

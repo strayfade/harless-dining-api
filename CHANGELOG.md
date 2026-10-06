@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- New: `areTheyHavingChickenSandwichesAtHarless()` — boolean for whether today's lunch or dinner has a chicken sandwich (plus exported `isChickenSandwich` name matcher)
+
 ## 0.1.0 — 2026-10-06
 
 Initial release.

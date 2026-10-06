@@ -9,11 +9,12 @@ import { cacheGet, cacheKey, cacheSet, clearCache, resolveTtl } from './cache.js
 import { fetchDayRaw } from './client.js';
 import { addDays, toDateString, weekOf } from './dates.js';
 import { HarlessValidationError } from './errors.js';
-import { parseDailyMenu } from './parse.js';
+import { isChickenSandwich, parseDailyMenu } from './parse.js';
 import type { DailyMenu, Meal, MealName, MenuOptions } from './types.js';
 
 export type { DailyMenu, DietFlag, Meal, MealName, MenuItem, MenuOptions, NutritionInfo, ServedAs, Station } from './types.js';
 export { HarlessError, HarlessNetworkError, HarlessParseError, HarlessValidationError } from './errors.js';
+export { isChickenSandwich } from './parse.js';
 export { clearCache } from './cache.js';
 export { TIME_ZONE } from './dates.js';
 
@@ -73,6 +74,20 @@ export async function getMeal(
 /** Get today's menu (America/New_York). */
 export async function getToday(opts?: MenuOptions): Promise<DailyMenu> {
   return getMenu(undefined, opts);
+}
+
+/**
+ * The important question: are they having chicken sandwiches at Harless today?
+ * Checks lunch and dinner (brunch counts as lunch) for anything matching
+ * {@link isChickenSandwich} — grilled or otherwise, any station.
+ * Returns false when there is no menu at all today.
+ */
+export async function areTheyHavingChickenSandwichesAtHarless(
+  opts?: MenuOptions,
+): Promise<boolean> {
+  const menu = await getToday(opts);
+  const items = [...(menu.meals.lunch?.items ?? []), ...(menu.meals.dinner?.items ?? [])];
+  return items.some((i) => isChickenSandwich(i.name));
 }
 
 /**

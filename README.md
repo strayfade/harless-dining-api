@@ -37,6 +37,12 @@ menu.meals.dinner?.stations.forEach((s) => {
 // One meal ('today', 'tomorrow', a Date, or 'YYYY-MM-DD')
 const lunch = await getMeal('today', 'lunch');
 
+// The important question:
+import { areTheyHavingChickenSandwichesAtHarless } from 'harless-dining-api';
+if (await areTheyHavingChickenSandwichesAtHarless()) {
+  console.log('Chicken sandwiches today!');
+}
+
 // This week (Mon–Sun, America/New_York)
 const week = await getWeek();
 ```
@@ -52,6 +58,7 @@ More runnable examples in [`examples/`](examples/): `basic.mjs`, `meal-today.ts`
 | `getToday` | `(opts?: MenuOptions) => Promise<DailyMenu>` | Today's menu. |
 | `getWeek` | `(date?: Date \| string, opts?: MenuOptions) => Promise<DailyMenu[]>` | 7 days, Mon–Sun. Days with no menu return `available: false`. |
 | `clearCache` | `() => void` | Empty the in-memory cache. |
+| `areTheyHavingChickenSandwichesAtHarless` | `(opts?: MenuOptions) => Promise<boolean>` | Today's lunch + dinner contain a chicken sandwich (grilled or otherwise)? |
 | `mealNames` | `() => MealName[]` | `['breakfast', 'lunch', 'dinner']`. |
 | `tomorrow` | `() => string` | Tomorrow's `YYYY-MM-DD`. |
 

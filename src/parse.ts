@@ -121,6 +121,19 @@ function parseGroup(raw: RawApiGroup): Station {
   return { name, items };
 }
 
+/**
+ * True when a menu item name looks like a chicken sandwich: contains
+ * "chicken"/"chick'n" plus a sandwich form (sandwich, burger, bun, patty,
+ * panini, ciabatta, baguette, hoagie, melt, wrap). Tenders, nuggets, tacos,
+ * soup, and quesadillas do not match.
+ */
+export function isChickenSandwich(name: string): boolean {
+  const n = name.toLowerCase();
+  const isChicken = /chick.?n/.test(n);
+  if (!isChicken) return false;
+  return /sandwich|burger|bun|patty|panini|ciabatta|baguette|hoagie|melt|wrap/.test(n);
+}
+
 /** Map a Sodexo daypart name to a MealName. Returns null for unknown dayparts. */
 export function mapDaypart(name: string): MealName | null {
   switch (name.trim().toLowerCase()) {

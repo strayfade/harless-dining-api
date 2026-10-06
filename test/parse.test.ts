@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { mapDaypart, parseCalories, parseDailyMenu } from '../src/parse.js';
+import { isChickenSandwich, mapDaypart, parseCalories, parseDailyMenu } from '../src/parse.js';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const weekday = JSON.parse(readFileSync(join(dir, 'fixtures/weekday.json'), 'utf8'));
@@ -90,6 +90,33 @@ describe('parseDailyMenu — empty / malformed', () => {
     const menu = parseDailyMenu([{ name: 'Late Night', groups: [] }], '2026-10-06');
     expect(menu.available).toBe(true);
     expect(menu.note).toMatch(/Late Night/);
+  });
+});
+
+describe('isChickenSandwich', () => {
+  it.each([
+    'Grilled Garlic Chicken Sandwich',
+    'Crispy Chicken Sandwich',
+    "Crispy Chick'n Sandwich",
+    'Grilled Chicken Burger',
+    'Chicken Patty On Bun',
+    'Buffalo Chicken Wrap',
+    'Chicken Ciabatta Melt',
+  ])('matches %s', (name) => {
+    expect(isChickenSandwich(name)).toBe(true);
+  });
+
+  it.each([
+    'Crispy Baked Chick\'n Tenders',
+    'Chicken Nuggets',
+    'Chicken Soft Taco',
+    'Chicken Char Siu',
+    'Old Fashioned Chicken Noodle Soup',
+    'Chicken & Cheese Quesadilla',
+    'Cheeseburger On Bun',
+    'Hash Browned Potatoes',
+  ])('rejects %s', (name) => {
+    expect(isChickenSandwich(name)).toBe(false);
   });
 });
 

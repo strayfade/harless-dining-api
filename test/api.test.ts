@@ -2,11 +2,12 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { clearCache, getMeal, getMenu, getWeek, normalizeMealName } from '../src/index.js';
+import { areTheyHavingChickenSandwichesAtHarless, clearCache, getMeal, getMenu, getWeek, normalizeMealName } from '../src/index.js';
 import { HarlessValidationError } from '../src/errors.js';
 
 const dir = dirname(fileURLToPath(import.meta.url));
 const weekday = JSON.parse(readFileSync(join(dir, 'fixtures/weekday.json'), 'utf8'));
+const weekend = JSON.parse(readFileSync(join(dir, 'fixtures/weekend.json'), 'utf8'));
 
 function stubFetch(payload: unknown, counter?: { calls: number }): typeof fetch {
   return (async () => {
@@ -67,6 +68,23 @@ describe('getMenu with stubbed fetch', () => {
       HarlessValidationError,
     );
     expect(fetchImpl).not.toHaveBeenCalled();
+  });
+});
+
+describe('areTheyHavingChickenSandwichesAtHarless with stubbed fetch', () => {
+  it('returns true when a chicken sandwich is served (weekend fixture)', async () => {
+    const ok = await areTheyHavingChickenSandwichesAtHarless({ fetchImpl: stubFetch(weekend) });
+    expect(ok).toBe(true);
+  });
+
+  it('returns false when only tenders/nuggets/etc. are served (weekday fixture)', async () => {
+    const ok = await areTheyHavingChickenSandwichesAtHarless({ fetchImpl: stubFetch(weekday) });
+    expect(ok).toBe(false);
+  });
+
+  it('returns false when there is no menu at all', async () => {
+    const ok = await areTheyHavingChickenSandwichesAtHarless({ fetchImpl: stubFetch([]) });
+    expect(ok).toBe(false);
   });
 });
 
